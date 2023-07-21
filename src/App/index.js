@@ -1,9 +1,6 @@
 import React from 'react';
-import { TodoCounter } from './TodoCounter';
-import { TodoSearch } from './TodoSearch';
-import { TodoList } from './TodoList';
-import { TodoItem } from './TodoItem';
-import { CreateTodoButton } from './CreateTodoButton';
+import { AppUI } from './AppUI';
+import {useLocalStorage} from './uselocalstorage';
 
 // const defaultTodos = [
 //   { text: 'Cortar cebolla', completed: true },
@@ -12,26 +9,15 @@ import { CreateTodoButton } from './CreateTodoButton';
 //   { text: 'LALALALALA', completed: false },
 // ];
 
+// localStorage.setItem('TODOS_V1', JSON.stringify (defaultTodos));
 
-// localStorage.setItem('TODOS_V1', defaultTodos);
-// localStorage.removeItem('TODOS_V1');
 
 function App() {
   {/* se asigna a la varia todos y setTodos una funcion de react estado la cual toma de defaulttodos la informacion
 */}
-const localStorageTodos = localStorage.getItem('TODOS_V1');
 
-if (!localStorageTodos) {
-  localStorage.setItem('TODOS_V1', JSON.stringify([]));
-  parsedTodos = [];
-}else {
-  parsed
-}
-
-
-
-let parsedTodos = JSON.parse (localStorageTodos);
-  const [todos, setTodos] = React.useState(parsedTodos);
+  const [todos, saveTodos] = useLocalStorage("TODOS_V1", []);
+  const [searchvalue, setsearchvalue] =React.useState('');
   
   {/*
   se asigna a la varia completedtodos la funcion de filter con la cual se le asigna otro nombre a la variable todo para 
@@ -41,9 +27,15 @@ dato boleano y .lenght para que cuenta cuantos  valores filtrados hay
   const completedTodos = todos.filter(todo => !!todo.completed).length;
   const totalTodos = todos.length; 
 
-  const [searchvalue, setsearchvalue] = React.useState('');
+console.log('log 1');
 
-  console.log(searchvalue);
+React.useEffect(() => {
+  console.log('log 2');
+}, [totalTodos]);
+
+console.log('log 3');
+
+
 {/*  se asigna la variable searchedtodos la funcion filtro se crea una nueva variable todo para que manipule informacion
 con la funcion includes me busque que texto tienen esa informacion*/}
   const searchedtodos = todos.filter(
@@ -53,55 +45,37 @@ con la funcion includes me busque que texto tienen esa informacion*/}
   }
   );
 
+ 
+
   const completeTodo = (text) => {
     const newTodos = [...todos];
     const todoindex = newTodos.findIndex(
-      (todo) => todo.text == text
+      (todo) => todo.text === text
     )
     newTodos[todoindex].completed = true;
-    setTodos(newTodos);
+    saveTodos(newTodos);
   }
 
   const DeleteTodo = (text) => {
     const newTodos = [...todos];
     const todoindex = newTodos.findIndex(
-      (todo) => todo.text == text
+      (todo) => todo.text === text
     )
     newTodos.splice(todoindex, 1);
-    setTodos(newTodos);
+    saveTodos(newTodos);
   }
 
-  return (
-    <>
-      <TodoCounter 
-      completed={completedTodos}  
-       total={totalTodos} 
-       />
-      <TodoSearch 
-      
-        valorbusqueda={searchvalue}
-        setvalorbusqueda={setsearchvalue}
-      
-      />
-       
-      <TodoList>
-        {searchedtodos.map(todo => (
-          <TodoItem
-            key={todo.text}
-            text={todo.text}
-            completed={todo.completed}
-            onComplete={() => completeTodo(todo.
-              text)}
-              onDelete={() => DeleteTodo(todo.completed.
-                text)}
-
-          />
-        ))}
-      </TodoList>
-      
-      <CreateTodoButton />
-    </>
-  );
+return (
+<AppUI
+ completedTodos={completedTodos}
+ totalTodos={totalTodos}
+ searchvalue={searchvalue}
+ setsearchvalue={setsearchvalue}
+ searchedtodos={searchedtodos}
+ completeTodo={completeTodo}
+ DeleteTodo={DeleteTodo}
+ />
+);
 }
-
 export default App;
+
