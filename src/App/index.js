@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppUI } from './AppUI';
-import {useLocalStorage} from './uselocalstorage';
+import {useLocalStorage} from './useLocalStorage';
 
 // const defaultTodos = [
 //   { text: 'Cortar cebolla', completed: true },
@@ -16,7 +16,12 @@ function App() {
   {/* se asigna a la varia todos y setTodos una funcion de react estado la cual toma de defaulttodos la informacion
 */}
 
-  const [todos, saveTodos] = useLocalStorage("TODOS_V1", []);
+  const {
+    item: todos,  
+    saveItem: saveTodos,
+    error,
+    loading,
+    } = useLocalStorage("TODOS_V1", []);
   const [searchvalue, setsearchvalue] =React.useState('');
   
   {/*
@@ -27,13 +32,6 @@ dato boleano y .lenght para que cuenta cuantos  valores filtrados hay
   const completedTodos = todos.filter(todo => !!todo.completed).length;
   const totalTodos = todos.length; 
 
-console.log('log 1');
-
-React.useEffect(() => {
-  console.log('log 2');
-}, [totalTodos]);
-
-console.log('log 3');
 
 
 {/*  se asigna la variable searchedtodos la funcion filtro se crea una nueva variable todo para que manipule informacion
@@ -67,6 +65,8 @@ con la funcion includes me busque que texto tienen esa informacion*/}
 
 return (
 <AppUI
+ loading={loading}
+ error={error}
  completedTodos={completedTodos}
  totalTodos={totalTodos}
  searchvalue={searchvalue}
