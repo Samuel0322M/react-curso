@@ -30,9 +30,9 @@ return (
       />
        
       <TodoList>
-        {loading && <p>Loading...</p>}
+        { loading && <p>Loading...</p>}
         {error && <p>there was a error</p>}
-        {!loading && searchedtodos.lenght === 0 
+        {(!loading && searchedtodos.lenght === 0 )
         && <p>¡Create your first TODO!</p>}
 
         {searchedtodos.map(todo => (

@@ -3,7 +3,7 @@ import React from 'react';
 function useLocalStorage(itemName, initialvalue ) {
   const [item, setItem] = React.useState (initialvalue);
 
-  const [Loading, setLoading] = React.useState (true);
+  const [loading, setloading] = React.useState (true);
   const [error, setError] = React.useState(false);
   
   React.useEffect(() =>  {
@@ -19,12 +19,12 @@ function useLocalStorage(itemName, initialvalue ) {
     parsedItem = JSON.parse(localStorageItem);
     setItem(parsedItem);
   }
-  setLoading(false)
+  setloading(false)
  } catch(error) {
-  setLoading(false)
+  setloading(false)
     setError(true);
   }
-},1000);
+}, 2000);
 }, []);
   
   const saveItem = (newItem) => {
@@ -36,7 +36,7 @@ function useLocalStorage(itemName, initialvalue ) {
   item,
   saveItem,
   error,
-  Loading,
+  loading,
   };   
 };
   
