@@ -3,42 +3,34 @@ import { TodoSearch } from '../TodoSearch';
 import { TodoList } from '../TodoList';
 import { TodoItem } from '../TodoItem';
 import { CreateTodoButton } from '../CreateTodoButton';
-import { TodosError } from '../TodosError/Index';
 import { TodosLoading } from '../TodosLoading';
+import { TodosError } from '../TodosError/Index';
 import { EmptyTodos } from '../EmptyTodos';
+import { TodoContext} from '../TodoContext';
 
-function AppUI ({
-    loading,
-    error,
-    completedTodos,
-    totalTodos,
-    searchvalue,
-    setsearchvalue,
-    searchedtodos,
-    completeTodo,
-    DeleteTodo,
-}){
-
+function AppUI (){
 return (
     <>
-      <TodoCounter 
-      completed={completedTodos}  
-       total={totalTodos} 
-       />
-      <TodoSearch 
-      
-        valorbusqueda={searchvalue}
-        setvalorbusqueda={setsearchvalue}
-      
-      />
+      <TodoCounter  />
+      <TodoSearch   />
        
+       <TodoContext.Consumer>
+      {({
+        loading,
+        error,
+        searchedtodos,
+        completeTodo,
+        DeleteTodo,
+      }) => (
+      
       <TodoList>
-        { loading && <TodosLoading /> } 
+        { loading && <TodosLoading />}
         {error && <TodosError />}
         {(!loading && searchedtodos.lenght === 0 )
-        && <EmptyTodos /> } 
+        && <EmptyTodos />}
 
         {searchedtodos.map(todo => (
+
           <TodoItem
             key={todo.text}
             text={todo.text}
@@ -50,7 +42,8 @@ return (
 
           />
         ))}
-      </TodoList>
+      </TodoList>)}
+      </TodoContext.Consumer>
       
       <CreateTodoButton />
     </>
