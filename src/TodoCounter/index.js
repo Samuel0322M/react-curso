@@ -17,13 +17,20 @@ function TodoCounter() {
     fontsize: '90 px', 
   }}>Crea tu primer TO DO</h1>
     );
-} else if (completedTodos == 0 && totalTodos !=0){
+} else if (completedTodos === 0 && totalTodos !==0){
   return (
   <h1 style={{
     textAlign: 'center',
     fontsize: '90 px',  
   }}>Completa tu primer TO DO'S</h1>
 );
+}else if (completedTodos === totalTodos ){
+  return (
+  <h1 style={{
+    textAlign: 'center',
+    fontsize: '90 px',  
+  }}>¡Felicidades has completado todos tus TO DO'S!</h1>
+); 
 } else {
   return (
     <h1 style={{

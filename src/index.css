@@ -4,7 +4,7 @@ body {
   background: #ffffff;
   color: #ffffff;
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-  background-color: black;
+  background-color: rgb(7, 7, 7);
 }
 
 #root {

@@ -8,9 +8,10 @@ function TodoProvider( {children}) {
     item: todos,  
     saveItem: saveTodos,
     error,
-    loading
+    loading,
     } = useLocalStorage("TODOS_V1", []);
-  const [searchvalue, setsearchvalue] =React.useState('');
+  const [searchvalue, setsearchvalue] = React.useState('');
+  const [openModal, setOpenModal] = React.useState(false);
   
   {/*
   se asigna a la varia completedtodos la funcion de filter con la cual se le asigna otro nombre a la variable todo para 
@@ -30,6 +31,15 @@ con la funcion includes me busque que texto tienen esa informacion*/}
     (searchvalue.toLowerCase());
   }
   );
+
+  const addTodo = (text) =>{
+    const newTodos = [...todos];
+    newTodos.push({
+      text,
+      completed:false,
+    });
+    saveTodos(newTodos);
+  }
 
   const completeTodo = (text) => {
     const newTodos = [...todos];
@@ -65,6 +75,9 @@ con la funcion includes me busque que texto tienen esa informacion*/}
     searchedtodos,
     completeTodo,
     DeleteTodo,
+    openModal,
+    setOpenModal,
+    addTodo,
   }}>
     {children}
   </TodoContext.Provider>
