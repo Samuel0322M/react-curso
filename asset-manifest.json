@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/htts//Samuel0322M.github.io/react-curso/static/css/main.ad162f41.css",
+    "main.js": "/htts//Samuel0322M.github.io/react-curso/static/js/main.69049fd3.js",
+    "static/media/check.svg": "/htts//Samuel0322M.github.io/react-curso/static/media/check.80d526fee295f88c3ed2fe2ac0730e04.svg",
+    "index.html": "/htts//Samuel0322M.github.io/react-curso/index.html",
+    "static/media/marck.svg": "/htts//Samuel0322M.github.io/react-curso/static/media/marck.dfd813346db6afb4b2d3ff932abc2f09.svg",
+    "main.ad162f41.css.map": "/htts//Samuel0322M.github.io/react-curso/static/css/main.ad162f41.css.map",
+    "main.69049fd3.js.map": "/htts//Samuel0322M.github.io/react-curso/static/js/main.69049fd3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ad162f41.css",
+    "static/js/main.69049fd3.js"
+  ]
+}
